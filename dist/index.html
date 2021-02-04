@@ -31,7 +31,7 @@
                 </li>
             </ol>
         </div>
-        <div class="answers">
+        <div class="answers" id="app">
             <h3>Результат</h3>
             <header>
                 <h1>Logo</h1>
@@ -44,9 +44,19 @@
                 </form>
                 <div class="basket" @click="showBasket = !showBasket">
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                    <div class="basketContent"></div>
+                    <div class="basketContent"> {{ basketContent.amount }} рублей</div>
                     <div class="basketList" v-if="showBasket"></div>
                 </div>
+
+                    <!-- //             document.querySelector(".basketContent").innerHTML = `0 рублей`;
+                    //             document.querySelector(".basketList").innerHTML = `Ваша корзина пуста`;
+                    //         }else{
+                    //             document.querySelector(".basketContent").innerHTML = `${this.amount} рублей`;
+                    //             for (let elem of this.content){
+                    //                 document.querySelector(".basketList").innerHTML += this.render(elem);
+                    //             }
+                    //         } -->
+
             </header>
             <div id="catalog">
                 <div class="product-item" v-for="product of products" :key="product.id_product">

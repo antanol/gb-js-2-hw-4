@@ -3,7 +3,7 @@ import '../style/main.scss';
 
 
 const app = new Vue({
-    el: '.answers',
+    el: '#app',
     data: {
         linkData: {
             catalogData: "https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/catalogData.json",
@@ -11,12 +11,17 @@ const app = new Vue({
         },
         showBasket: false,
         products: [],
-        basketContent: []
+        basketContent: {
+            amount: 0,
+            countGoods: 0,
+            content: []
+        }
     },
     // methods: {
     // },
     mounted(){
         // аналог window.onload
+
         fetch(this.linkData.catalogData)
             .then(result => {
                 result.json()
@@ -28,29 +33,25 @@ const app = new Vue({
                 document.querySelector('.catalog').innerHTML = `<h1>Что-то пошло не так...</h1> Простите, но мы не смогли найти товары. Пожалуйста, зайдите позже!`
             });
 
-        // fetch(this.linkData.getBasket)
-        //     .then(result => {
-        //         result.json()
-        //         .then(data => {
-        //             this.content = data.contents;
-        //             this.amount = data.amount;
-        //             this.countGoods = data.countGoods;
-        //             this.startState();
-        //         })
-        //         .catch(err=>{
-        //             // если файлик не найден, берём пустую корзину
-        //             this.content = [];
-        //             this.amount = amount;
-        //             this.countGoods = this.countGoods;
-        //             this.startState();
-        //         });
-        // }
-        //     })
-        //     .catch(error => {
-        //         console.log(error);
-        //     })
-            
-            
+        fetch(this.linkData.getBasket)
+            .then(result => {
+                result.json()
+                .then(data => {
+                    // this.basketContent = [...data];
+                    this.basketContent.content = data.contents;
+                    this.basketContent.amount = data.amount;
+                    this.basketContent.countGoods = data.countGoods;
+                })
+            })
+            .catch(err=>{
+                // если файлик не найден, берём пустую корзину
+                this.basketContent.content = [];
+                this.basketContent.amount = 0;
+                this.basketContent.countGoods = 0;
+            });
+
+        console.log(this);
+        console.log(this.basketContent.amount)
     }
 });
 
