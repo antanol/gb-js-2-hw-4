@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ДЗ 5</title>
+    
+    <!-- Стили подключаем через лоадеры вебпака -->
+    <!-- <link rel="stylesheet" href="style/main.css"> -->
+    <!-- Подключение font-awesome -->
+    <script src="https://use.fontawesome.com/3a05ab18ac.js"></script>
+</head>
+<body>
+    <div class="tasks">
+        <div class="texttasks">
+            <h3>Задания:</h3>
+            <ol>
+                <li>
+                    Добавить методы и обработчики событий для поля поиска. 
+                    Создать в объекте данных поле searchLine и привязать к нему содержимое поля ввода. 
+                    На кнопку «Искать» добавить обработчик клика, вызывающий метод FilterGoods.
+                </li>
+                <li>
+                    Добавить корзину. В html-шаблон добавить разметку корзины.
+                    Добавить в объект данных поле isVisibleCart, управляющее видимостью корзины.
+                </li>
+                <li>
+                    Добавлять в .goods-list заглушку с текстом «Нет данных» в случае, если список товаров пуст.
+                </li>
+            </ol>
+        </div>
+        <div class="answers">
+            <h3>Результат</h3>
+            <header>
+                <h1>Logo</h1>
+                
+                <form action="#" class="search-form">
+                    <input type="text" class="search-field">
+                    <button class="btn-search" type="submit">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                </form>
+                <div class="basket">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    <div class="basketContent"></div>
+                    <div class="basketList"></div>
+                </div>
+            </header>
+            <div id="catalog"></div>
+        </div>
+    </div>
+
+    <script src="bundle.js"></script>
+</body>
+</html>

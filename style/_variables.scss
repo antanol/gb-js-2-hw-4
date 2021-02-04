@@ -1,0 +1,22 @@
+%main_subtask{
+    padding: 1em 3em;
+}
+
+@mixin btns_nav{
+    border: none;
+
+    height: 100%;
+    width: 20px;
+    
+    background-color: rgba($color: #000, $alpha: .5);
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover{
+        text-shadow: 0 0 5px yellow;
+        opacity: .9;
+    }
+}
