@@ -55,42 +55,7 @@ const app = new Vue({
     }
 });
 
-// class Product{
-//     constructor(id_product, name, price, quantity=0){
-//         this.id_product = id_product;
-//         this.name = name;
-//         this.price = price;
-//         this.quantity = quantity;
-//     }
-// }
-
-// class CatalogPage{
-//     constructor(container = '#catalog', content){
-//         this.container = container;
-//         this.content = [];
-//         this._getContent()
-//             .then(data => { //data - объект js
-//                 this.content = [...data];
-//                 this.renderPage();
-//                 this.listeners();
-//             });
-//     }
-
-//     _getContent(){
-//         return fetch(catalogData)
-//             .then(result => result.json())
-//             .catch(error => {
-//                 document.querySelector(this.container).innerHTML = `<h1>Что-то пошло не так...</h1> Простите, но мы не смогли найти товары. Пожалуйста, зайдите позже!`
-//             })
-//     }
-
-//     renderPage(){
-//         for (let elem of this.content){
-//             let product = new Product(elem.id_product, elem.product_name, elem.price);
-//             document.querySelector(this.container).innerHTML += product.render();
-//         }
-//     }
-    
+// class CatalogPage{  
 //     filter(value){
 //         const regexp = new RegExp(value, 'i');
 //         this.filtered = this.content.filter(product => regexp.test(product.product_name));
@@ -148,52 +113,6 @@ const app = new Vue({
 // }
 
 // class Basket{
-//     constructor(content=[], amount=0, countGoods=0){
-//         this._getContent()
-//             .then(data => {
-//                 this.content = data.contents;
-//                 this.amount = data.amount;
-//                 this.countGoods = data.countGoods;
-//                 this.startState();
-//             })
-//             .catch(err=>{
-//                 // если файлик не найден, берём пустую корзину
-//                 this.content = [];
-//                 this.amount = amount;
-//                 this.countGoods = this.countGoods;
-//                 this.startState();
-//             });
-//     }
-
-//     _getContent(){
-//         return fetch(getBasket)
-//             .then(result => result.json())
-//             .catch(error => {
-//                 console.log(error);
-//             })
-//     }
-    
-//     startState(){
-//         // если не было чекпоинта, т.е. если getBasket пуст
-//         if (this.amount == 0){
-//             document.querySelector(".basketContent").innerHTML = `0 рублей`;
-//             document.querySelector(".basketList").innerHTML = `Ваша корзина пуста`;
-//         }else{
-//             document.querySelector(".basketContent").innerHTML = `${this.amount} рублей`;
-//             for (let elem of this.content){
-//                 document.querySelector(".basketList").innerHTML += this.render(elem);
-//             }
-//         }
-
-//         this.listeners();
-//     }
-
-//     listeners(){
-//         document.querySelector('.basket').addEventListener('click', ()=>{
-//             document.querySelector('.basketList').classList.toggle("visible");
-//         });
-//     }
-
 //     checkAmount(elem, quantity){
 //         let temp_count = 0;
 //         // for (let i=0; i<this.content.length; i++){
@@ -206,25 +125,17 @@ const app = new Vue({
 //         document.querySelector(".basketContent").innerHTML = `${this.amount} рублей`
 //     }
 
-//     render(elem){
-//         return `<div class="basketElem" data-id="${elem.id_product}">
-//                     <img src="http://placehold.it/50x50">
-//                     <b>${elem.product_name}</b>
-//                     <div class="price">${elem.quantity}шт. на ${elem.price*elem.quantity} рублей</div>
-//                 </div>`;
-//     }
-
 //     putInBasket(newElem, newNum){
 //         let alreadyExist = this.content.find(item => item.product_name == newElem.product_name);
 //         if (!alreadyExist){
 //             this.content.push(newElem);
 //         };
 //         let basketGoods = this.render(newElem);
-//         let oldNumGoods = document.querySelector(`.basketElem[data-id="${newElem.id_product}"]`);
+//         let oldNumGoods = document.querySelector(`.basket-item[data-id="${newElem.id_product}"]`);
 //         if (oldNumGoods){
 //             oldNumGoods.remove();
 //         }
-//         if (!document.querySelector(".basketElem")) {
+//         if (!document.querySelector(".basket-item")) {
 //             document.querySelector(".basketList").innerHTML = basketGoods;
 //         }else{
 //             document.querySelector(".basketList").innerHTML += basketGoods;
