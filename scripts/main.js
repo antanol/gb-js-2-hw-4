@@ -6,13 +6,51 @@ const app = new Vue({
     el: '.answers',
     data: {
         linkData: {
-            pathProductJSON: "https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/catalogData.json",
-            pathBasketContentJSON: "https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/getBasket.json"
+            catalogData: "https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/catalogData.json",
+            getBasket: "https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/getBasket.json"
         },
-        showBasket: false
+        showBasket: false,
+        products: [],
+        basketContent: []
     },
-    methods: {
+    // methods: {
+    // },
+    mounted(){
+        // аналог window.onload
+        fetch(this.linkData.catalogData)
+            .then(result => {
+                result.json()
+                .then(data => {
+                    this.products = [...data];
+                })
+            })
+            .catch(error => {
+                document.querySelector('.catalog').innerHTML = `<h1>Что-то пошло не так...</h1> Простите, но мы не смогли найти товары. Пожалуйста, зайдите позже!`
+            });
 
+        // fetch(this.linkData.getBasket)
+        //     .then(result => {
+        //         result.json()
+        //         .then(data => {
+        //             this.content = data.contents;
+        //             this.amount = data.amount;
+        //             this.countGoods = data.countGoods;
+        //             this.startState();
+        //         })
+        //         .catch(err=>{
+        //             // если файлик не найден, берём пустую корзину
+        //             this.content = [];
+        //             this.amount = amount;
+        //             this.countGoods = this.countGoods;
+        //             this.startState();
+        //         });
+        // }
+        //     })
+        //     .catch(error => {
+        //         console.log(error);
+        //     })
+            
+            
     }
 });
 
@@ -22,18 +60,6 @@ const app = new Vue({
 //         this.name = name;
 //         this.price = price;
 //         this.quantity = quantity;
-//     }
-
-//     render(){
-//         return `<div data-id="${this.id_product}" class="productElem">
-//                 <img src="http://placehold.it/150x200">
-//                 <h4>${this.name}</h4>
-//                 <div class="price">${this.price} рублей</div>
-//                 <button data-id="${this.id_product}" class="btnMinus">-</button>
-//                 <input data-id="${this.id_product}" type="number" name="nunProd" value="1">
-//                 <button data-id="${this.id_product}" class="btnPlus">+</button><br>
-//                 <button data-id="${this.id_product}" class="btnBuyIt">Купить</button>
-//             </div>`;
 //     }
 // }
 
@@ -50,7 +76,7 @@ const app = new Vue({
 //     }
 
 //     _getContent(){
-//         return fetch(pathProductJSON)
+//         return fetch(catalogData)
 //             .then(result => result.json())
 //             .catch(error => {
 //                 document.querySelector(this.container).innerHTML = `<h1>Что-то пошло не так...</h1> Простите, но мы не смогли найти товары. Пожалуйста, зайдите позже!`
@@ -68,7 +94,7 @@ const app = new Vue({
 //         const regexp = new RegExp(value, 'i');
 //         this.filtered = this.content.filter(product => regexp.test(product.product_name));
 //         this.content.forEach(el => {
-//             const block = document.querySelector(`.productElem[data-id="${el.id_product}"]`);
+//             const block = document.querySelector(`.product-item[data-id="${el.id_product}"]`);
 //             if(!this.filtered.includes(el)){
 //                 block.classList.add('hidden-screen');
 //             } else {
@@ -139,7 +165,7 @@ const app = new Vue({
 //     }
 
 //     _getContent(){
-//         return fetch(pathBasketContentJSON)
+//         return fetch(getBasket)
 //             .then(result => result.json())
 //             .catch(error => {
 //                 console.log(error);
@@ -147,7 +173,7 @@ const app = new Vue({
 //     }
     
 //     startState(){
-//         // если не было чекпоинта, т.е. если pathBasketContentJSON пуст
+//         // если не было чекпоинта, т.е. если getBasket пуст
 //         if (this.amount == 0){
 //             document.querySelector(".basketContent").innerHTML = `0 рублей`;
 //             document.querySelector(".basketList").innerHTML = `Ваша корзина пуста`;

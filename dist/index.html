@@ -48,7 +48,17 @@
                     <div class="basketList" v-if="showBasket"></div>
                 </div>
             </header>
-            <div id="catalog"></div>
+            <div id="catalog">
+                <div class="product-item" v-for="product of products" :key="product.id_product">
+                    <img src="http://placehold.it/150x200">
+                    <h4>{{product.product_name}}</h4>
+                    <div class="price">{{product.price}} рублей</div>
+                    <button class="btnMinus">-</button>
+                    <input type="number" name="nunProd" value="1">
+                    <button class="btnPlus">+</button><br>
+                    <button class="btnBuyIt">Купить</button>
+                </div>
+            </div>
         </div>
     </div>
 
