@@ -51,7 +51,7 @@
                         <div class="basket-item" v-for="elem of basketContent.content" :key="elem.id_product">
                             <img src="http://placehold.it/50x50">
                             <b>{{elem.product_name}}</b>
-                            <div class="price">{{elem.quantity}}шт. на {{elem.price*elem.quantity}} рублей</div>
+                            <div class="price">{{elem.quantity}} шт. на {{elem.price*elem.quantity}} рублей</div>
                         </div>
                     </div>
                 </div>
@@ -61,10 +61,10 @@
                     <img src="http://placehold.it/150x200">
                     <h4>{{product.product_name}}</h4>
                     <div class="price">{{product.price}} рублей</div>
-                    <button class="btnMinus">-</button>
-                    <input type="number" name="nunProd" value="1">
-                    <button class="btnPlus">+</button><br>
-                    <button class="btnBuyIt">Купить</button>
+                    <button :data-id="product.id_product" class="btnMinus">-</button>
+                    <input :data-id="product.id_product" type="number" name="nunProd" value="1">
+                    <button :data-id="product.id_product" class="btnPlus">+</button><br>
+                    <button :data-id="product.id_product" class="btnBuyIt" @click="putInBasket($event)">Купить</button>
                 </div>
             </div>
         </div>

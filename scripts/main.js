@@ -17,8 +17,31 @@ const app = new Vue({
             content: []
         }
     },
-    // methods: {
-    // },
+    methods: {
+        putInBasket(event, newElem){
+            let eventID = Number(event.target.dataset.id);
+            let newNum = Number(document.querySelector(`input[data-id="${eventID}"]`).value);
+
+            let alreadyExist = this.basketContent.content.find(item => item.id_product == eventID);
+            if (alreadyExist){
+                alreadyExist.quantity += newNum;
+                this.basketContent.content.countGoods += newNum;
+            }else{
+                let newElem = this.products.find(item => item.id_product == eventID);
+                newElem.quantity = newNum;
+                this.basketContent.content.push(newElem);
+            };
+            this.checkAmount();
+        },
+
+        checkAmount(){
+            let temp_count = 0;
+            for (let elem of this.basketContent.content){
+                temp_count += elem.price * elem.quantity;
+            }
+            this.basketContent.amount = temp_count;
+        }
+    },
     mounted(){
         // аналог window.onload
 
@@ -49,9 +72,6 @@ const app = new Vue({
                 this.basketContent.amount = 0;
                 this.basketContent.countGoods = 0;
             });
-
-        console.log(this);
-        console.log(this.basketContent.amount)
     }
 });
 
@@ -111,40 +131,3 @@ const app = new Vue({
 //         })
 //     }
 // }
-
-// class Basket{
-//     checkAmount(elem, quantity){
-//         let temp_count = 0;
-//         // for (let i=0; i<this.content.length; i++){
-//         //     temp_count += quantity * this.content[i].price;
-//         // }
-//         temp_count = this.amount + elem.price * quantity;
-
-//         this.amount = temp_count;
-//         this.countGoods += quantity;
-//         document.querySelector(".basketContent").innerHTML = `${this.amount} рублей`
-//     }
-
-//     putInBasket(newElem, newNum){
-//         let alreadyExist = this.content.find(item => item.product_name == newElem.product_name);
-//         if (!alreadyExist){
-//             this.content.push(newElem);
-//         };
-//         let basketGoods = this.render(newElem);
-//         let oldNumGoods = document.querySelector(`.basket-item[data-id="${newElem.id_product}"]`);
-//         if (oldNumGoods){
-//             oldNumGoods.remove();
-//         }
-//         if (!document.querySelector(".basket-item")) {
-//             document.querySelector(".basketList").innerHTML = basketGoods;
-//         }else{
-//             document.querySelector(".basketList").innerHTML += basketGoods;
-//         }
-//         this.checkAmount(newElem, newNum);
-//     }
-// };
-
-// // инициирует корзину товаров
-// let basket = new Basket();
-// // инициирует страницу каталога товаров
-// let catalog = new CatalogPage();
