@@ -40,6 +40,22 @@ const app = new Vue({
                 temp_count += elem.price * elem.quantity;
             }
             this.basketContent.amount = temp_count;
+        },
+
+        incrementNum(event){
+            let field = document.querySelector(`input[data-id="${event.target.dataset.id}"]`);
+            let currentNum = Number(field.value);
+            currentNum++;
+            field.value = currentNum;
+        },
+
+        decrementNum(event){
+            let field = document.querySelector(`input[data-id="${event.target.dataset.id}"]`);
+            let currentNum = Number(field.value);
+            if (currentNum > 1){
+                currentNum--;
+            }
+            field.value = currentNum;
         }
     },
     mounted(){
@@ -91,39 +107,6 @@ const app = new Vue({
 
 //     listeners(){
 //         // обработка кнопок
-//         let btnsMinus = document.querySelectorAll('.btnMinus'),
-//             btnsPlus = document.querySelectorAll('.btnPlus'),
-//             btnsBuy = document.querySelectorAll('.btnBuyIt');
-//         for (let btn of btnsMinus){
-//             btn.addEventListener('click', (event)=>{
-//                 if (document.querySelector(`input[data-id="${event.target.dataset.id}"]`).value > 1){
-//                     document.querySelector(`input[data-id="${event.target.dataset.id}"]`).value--;
-//                 }
-//             });
-//         }
-
-//         for (let btn of btnsPlus){
-//             btn.addEventListener('click', (event)=>{
-//                 document.querySelector(`input[data-id="${event.target.dataset.id}"]`).value++;
-//             });
-//         }
-
-//         for (let btn of btnsBuy){
-//             btn.addEventListener('click', (event)=>{
-//                 console.log(basket);
-//                 let buyingElem =  this.content.find(item => item.id_product === Number(event.target.dataset.id));
-//                 console.log(buyingElem);
-//                 let newNum = Number(document.querySelector(`input[data-id="${event.target.dataset.id}"]`).value);
-//                 if (!buyingElem.quantity){
-//                     buyingElem.quantity = newNum;
-//                 }else{
-//                     buyingElem.quantity += newNum;
-//                 }
-
-//                 basket.putInBasket(buyingElem, newNum);
-//             });
-//         }
-
 //         document.querySelector('.search-form').addEventListener('submit', e => {
 //             // если событие не обрабатывается явно, его действие по умолчанию не должно выполняться так, как обычно
 //             e.preventDefault();

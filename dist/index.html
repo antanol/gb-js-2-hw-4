@@ -61,9 +61,9 @@
                     <img src="http://placehold.it/150x200">
                     <h4>{{product.product_name}}</h4>
                     <div class="price">{{product.price}} рублей</div>
-                    <button :data-id="product.id_product" class="btnMinus">-</button>
+                    <button :data-id="product.id_product" class="btnMinus" @click="decrementNum($event)">-</button>
                     <input :data-id="product.id_product" type="number" name="nunProd" value="1">
-                    <button :data-id="product.id_product" class="btnPlus">+</button><br>
+                    <button :data-id="product.id_product" class="btnPlus" @click="incrementNum($event)">+</button><br>
                     <button :data-id="product.id_product" class="btnBuyIt" @click="putInBasket($event)">Купить</button>
                 </div>
             </div>
