@@ -60,6 +60,12 @@ const app = new Vue({
             field.value = currentNum;
         },
 
+        alsoFilter(event){
+            if (event.keyCode == 13) {
+                this.filterGoods();
+            }
+        },
+
         filterGoods(){
             const regexp = new RegExp(this.searchLine, 'i');
             this.filtered = this.products.filter(product => regexp.test(product.product_name));

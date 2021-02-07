@@ -37,7 +37,7 @@
                 <h1>Logo</h1>
                 
                 <div class="search-form">
-                    <input type="text" class="search-field" v-model="searchLine">
+                    <input type="text" class="search-field" v-model="searchLine" @keydown="alsoFilter($event)">
                     <button class="btn-search" @click="filterGoods()">
                         <i class="fa fa-search" aria-hidden="true"></i>
                     </button>
