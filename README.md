@@ -12,4 +12,4 @@
 3. *Добавлять в .goods-list заглушку с текстом «Нет данных» в случае, если список товаров пуст.
 
 Работу сайта можно посмотреть здесь:
-    https://antanol.github.io/gb-js2-hw5/dist/index.html
+    https://antanol.github.io/gb-js2-hw5/dist/
