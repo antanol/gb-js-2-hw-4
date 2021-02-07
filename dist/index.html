@@ -36,12 +36,12 @@
             <header>
                 <h1>Logo</h1>
                 
-                <form action="#" class="search-form">
-                    <input type="text" class="search-field">
-                    <button class="btn-search" type="submit">
+                <div class="search-form">
+                    <input type="text" class="search-field" v-model="searchLine">
+                    <button class="btn-search" @click="filterGoods()">
                         <i class="fa fa-search" aria-hidden="true"></i>
                     </button>
-                </form>
+                </div>
                 <div class="basket" @click="showBasket = !showBasket">
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                     <div class="basketContent"> {{ basketContent.amount }} рублей</div>
@@ -57,7 +57,7 @@
                 </div>
             </header>
             <div id="catalog">
-                <div class="product-item" v-for="product of products" :key="product.id_product">
+                <div class="product-item" v-for="product of products" :key="product.id_product" :data-id="product.id_product">
                     <img src="http://placehold.it/150x200">
                     <h4>{{product.product_name}}</h4>
                     <div class="price">{{product.price}} рублей</div>

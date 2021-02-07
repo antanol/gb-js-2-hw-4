@@ -9,6 +9,8 @@ const app = new Vue({
             catalogData: "https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/catalogData.json",
             getBasket: "https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses/getBasket.json"
         },
+        searchLine: "",
+        filtered: [],
         showBasket: false,
         products: [],
         basketContent: {
@@ -56,6 +58,19 @@ const app = new Vue({
                 currentNum--;
             }
             field.value = currentNum;
+        },
+
+        filterGoods(){
+            const regexp = new RegExp(this.searchLine, 'i');
+            this.filtered = this.products.filter(product => regexp.test(product.product_name));
+            this.products.forEach(el => {
+                const block = document.querySelector(`.product-item[data-id="${el.id_product}"]`);
+                if(!this.filtered.includes(el)){
+                    block.classList.add('hidden-screen');
+                } else {
+                    block.classList.remove('hidden-screen');
+                }
+            })
         }
     },
     mounted(){
@@ -76,41 +91,16 @@ const app = new Vue({
             .then(result => {
                 result.json()
                 .then(data => {
-                    // this.basketContent = [...data];
                     this.basketContent.content = data.contents;
                     this.basketContent.amount = data.amount;
                     this.basketContent.countGoods = data.countGoods;
                 })
             })
             .catch(err=>{
-                // если файлик не найден, берём пустую корзину
+                // если файл не найден, берём пустую корзину
                 this.basketContent.content = [];
                 this.basketContent.amount = 0;
                 this.basketContent.countGoods = 0;
             });
     }
 });
-
-// class CatalogPage{  
-//     filter(value){
-//         const regexp = new RegExp(value, 'i');
-//         this.filtered = this.content.filter(product => regexp.test(product.product_name));
-//         this.content.forEach(el => {
-//             const block = document.querySelector(`.product-item[data-id="${el.id_product}"]`);
-//             if(!this.filtered.includes(el)){
-//                 block.classList.add('hidden-screen');
-//             } else {
-//                 block.classList.remove('hidden-screen');
-//             }
-//         })
-//     }
-
-//     listeners(){
-//         // обработка кнопок
-//         document.querySelector('.search-form').addEventListener('submit', e => {
-//             // если событие не обрабатывается явно, его действие по умолчанию не должно выполняться так, как обычно
-//             e.preventDefault();
-//             this.filter(document.querySelector('.search-field').value);
-//         })
-//     }
-// }
